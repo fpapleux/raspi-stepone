@@ -291,10 +291,18 @@ if [ "$installNode" == "1" ]; then
 	echo -e " Installing node.js..."
 	echo -e "-------------------------------------------------------------------------------------"
 
-	curl -sLS https://deb.nodesource.com/setup_4.x | sudo bash
-	sudo apt-get install -y build-essential python-rpi.gpio nodejs
-	sudo mkdir /usr/local/bin
-	sudo ln -s /usr/bin/nodejs /usr/local/bin/node
+	cd ~
+	wget https://nodejs.org/dist/v6.10.2/node-v6.10.2-linux-armv6l.tar.xz
+	tar -xvf node-v6.10.2-linux-armv6l.tar.xz
+	cd node-v6.10.2-linux-armv6l
+	sudo cp -R bin/ /usr/local/
+	sudo cp -R include /usr/local/
+	sudo cp -R lib/ /usr/local/
+	sudo cp -R share/ /usr/local/
+	cd ..
+	rm node-v6.10.2-linux-armv6l.tar.xz
+	rm -rf node-v6.10.2-linux-armv6l
+	
 	echo -e "\n\n Node JS install complete -- current version is $(node -v)"
 fi
 
